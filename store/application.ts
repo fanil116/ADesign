@@ -10,6 +10,7 @@ export const useApplicationStore = defineStore('application', () => {
   const products: Ref<Product[]> = ref([])
   const lastUpdated: Ref<number | null> = ref(null)
   const cacheTime = 5 * 60 * 1000 // 5 минут
+  const selectedProduct: Ref<Product[]> = ref([])
 
   const loadProducts = async () => {
     const now = Date.now()
@@ -42,5 +43,9 @@ export const useApplicationStore = defineStore('application', () => {
     loadProducts()
   }
 
-  return { products, loadProducts, initStore }
+  const addProduct = (item: Product) => {
+    selectedProduct.value.push(item)
+  }
+
+  return { products, selectedProduct, loadProducts, initStore, addProduct }
 })

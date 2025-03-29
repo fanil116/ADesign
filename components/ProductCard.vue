@@ -53,6 +53,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Product } from '@/types'
+import { useApplicationStore } from '@/store/application'
+
+const store = useApplicationStore()
 
 const props = defineProps({
   item: {
@@ -60,7 +63,7 @@ const props = defineProps({
     required: true,
   },
 })
-
+const emit = defineEmits(['showPopup'])
 const isHovered = ref(false)
 
 const onMouseEnter = () => {
@@ -72,7 +75,8 @@ const onMouseLeave = () => {
 }
 
 const addCard = () => {
-  console.log("add")
+  store.addProduct(props.item)
+  emit('showPopup')
 }
 function format(price: number) {
   return price.toLocaleString('ru-RU', {
@@ -86,6 +90,7 @@ const calculateDiscount = (oldPrice: number, newPrice: number) => {
   return Math.round(((oldPrice - newPrice) / oldPrice) * 100)
 }
 </script>
+
 <style lang="css" scoped>
 .product-card__item-discount {
     position: absolute;
@@ -106,10 +111,10 @@ const calculateDiscount = (oldPrice: number, newPrice: number) => {
     transition: transform 0.3s ease;
     position: relative;
   }
-  
+
   .group:hover {
-    transform: scale(1.1); 
-    z-index: 10; 
+    transform: scale(1.1);
+    z-index: 10;
   }
   .product-card__wrapper {
     background: #fff;
