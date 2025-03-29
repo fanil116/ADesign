@@ -7,7 +7,7 @@
         <div class="flex items-center cursor-pointer">
           <Icon
             name="material-symbols:shopping-basket-outline"
-            class="mr-4 w-[32px] h-[32px]"
+            class="mr-4 header__icon"
           />
           <div class="text-sm mr-21">
             12 товаров
@@ -18,4 +18,10 @@
   </template>
   
   <script setup lang="ts"></script>
+  <style scoped>
+    .header__icon {
+        width: 32px;
+        height: 32px;
+    }
+    </style>
   

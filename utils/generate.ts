@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-
+import { path } from './path'
 interface Product {
     image: string;
     newPrice: number;
